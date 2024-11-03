@@ -39,4 +39,4 @@ jobs:
         run: echo "{name}={value}" >> $GITHUB_STATE
 
       - name: Use extracted version
-        run: echo "Extracted version is ${{ steps.RELEASE_VERSION }}"
+        run: echo "Extracted version is ${{ env.RELEASE_VERSION }}"
