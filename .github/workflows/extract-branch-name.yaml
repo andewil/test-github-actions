@@ -28,11 +28,15 @@ jobs:
           if [[ "$branch_name" =~ release/([0-9]+\.[0-9]+\.[0-9]+) ]]; then
           version="${BASH_REMATCH[1]}"
           echo "Version: $version"
+          echo "RELEASE_VERSION=${version} >> ${GITHUB_STATE}
           echo "::set-output name=version::$version"
           else
           echo "Не удалось извлечь версию из имени ветки"
           exit 1
           fi
 
+      - name: Save state
+        run: echo "{name}={value}" >> $GITHUB_STATE
+
       - name: Use extracted version
-        run: echo "Extracted version is ${{ steps.extract_version.outputs.version }}"
+        run: echo "Extracted version is ${{ steps.RELEASE_VERSION }}"
