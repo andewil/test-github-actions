@@ -36,3 +36,10 @@ jobs:
 
       - name: Use extracted version
         run: echo "Extracted version is ${{ env.RELEASE_VERSION }}"
+
+  greet:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send greeting
+        run: echo "${{ github.event.inputs.message }} ${{ fromJSON('["", "🥳"]')[github.event.inputs.use-emoji == 'true'] }} ${{ github.event.inputs.name }}"
