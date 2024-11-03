@@ -8,6 +8,7 @@ on:
       - dev
       - 'release/*'
       - 'feature/*'
+      - 'user-input'
 
 jobs:
   extract:
@@ -47,3 +48,14 @@ jobs:
           echo "Another place with version: ${{ env.RELEASE_VERSION }}"
       - name: Send greeting
         run: echo "${{ github.event.inputs.message }} ${{ fromJSON('["", "🥳"]')[github.event.inputs.use-emoji == 'true'] }} ${{ github.event.inputs.name }}"
+
+  extract-bash:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Extract version by script
+        run: |
+          chmod +x *.sh
+          call ./extract-version.sh
