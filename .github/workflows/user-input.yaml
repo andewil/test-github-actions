@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - user-input
+      - user-input2
   workflow_dispatch:
     inputs:
       name:
