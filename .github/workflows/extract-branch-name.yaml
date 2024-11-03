@@ -58,6 +58,8 @@ jobs:
       - name: Prepare scripts
         run: |
           chmod +x *.sh
+
       - name: Extract version by script
         run: |
-          ./extract-version.sh >> $GITHUB_OUTPUT
+          ./extract-version.sh
+        shell: bash
