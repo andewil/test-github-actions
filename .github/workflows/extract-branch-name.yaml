@@ -63,4 +63,4 @@ jobs:
         shell: bash
 
       - name: Print version
-        run: echo "version=${{ env.VAR1 }}
+        run: echo "version=${{ env.VAR1 }}"
