@@ -38,10 +38,12 @@ jobs:
 
   greet:
     runs-on: ubuntu-latest
+    needs:
+      - extract
 
     steps:
       - name: Print version
         run: | 
-          echo "Another place with version: ${{ env.RELEASE_VERSION }}
+          echo "Another place with version: ${{ env.RELEASE_VERSION }}"
       - name: Send greeting
         run: echo "${{ github.event.inputs.message }} ${{ fromJSON('["", "🥳"]')[github.event.inputs.use-emoji == 'true'] }} ${{ github.event.inputs.name }}"
