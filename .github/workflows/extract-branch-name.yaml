@@ -6,8 +6,8 @@ on:
       - main
       - qa
       - dev
-      - 'release/**'
-      - 'feature/**'
+      - 'release/*'
+      - 'feature/*'
 
 jobs:
   extract:
@@ -17,3 +17,22 @@ jobs:
       - name: Extract names
         run: |
           echo 'github.ref: ' ${{ github.ref }}
+
+      - name: Extract version from branch name
+        id: extract_version
+        run: |
+          # Извлекаем имя ветки из переменной GITHUB_REF
+          branch_name="${GITHUB_REF#refs/heads/}"
+          
+          # Используем регулярное выражение для извлечения версии
+          if [[ "$branch_name" =~ release/([0-9]+\.[0-9]+\.[0-9]+) ]]; then
+          version="${BASH_REMATCH[1]}"
+          echo "Version: $version"
+          echo "::set-output name=version::$version"
+          else
+          echo "Не удалось извлечь версию из имени ветки"
+          exit 1
+          fi
+
+      - name: Use extracted version
+        run: echo "Extracted version is ${{ steps.extract_version.outputs.version }}"
