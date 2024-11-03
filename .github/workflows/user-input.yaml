@@ -1,9 +1,6 @@
 name: Mixed inputs
 
 on:
-  push:
-    branches:
-      - user-input
   workflow_dispatch:
     inputs:
       name:

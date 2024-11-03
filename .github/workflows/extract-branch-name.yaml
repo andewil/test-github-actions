@@ -30,9 +30,20 @@ jobs:
           echo "Extracted Version: $version"
           echo "RELEASE_VERSION=${version}" >> ${GITHUB_ENV}
           else
-          echo "Не удалось извлечь версию из имени ветки"
-          exit 1
+          echo "RELEASE_VERSION=${branch_name}" >> ${GITHUB_ENV}
           fi
 
       - name: Use extracted version
         run: echo "Extracted version is ${{ env.RELEASE_VERSION }}"
+
+  greet:
+    runs-on: ubuntu-latest
+    needs:
+      - extract
+
+    steps:
+      - name: Print version
+        run: | 
+          echo "Another place with version: ${{ env.RELEASE_VERSION }}"
+      - name: Send greeting
+        run: echo "${{ github.event.inputs.message }} ${{ fromJSON('["", "🥳"]')[github.event.inputs.use-emoji == 'true'] }} ${{ github.event.inputs.name }}"
