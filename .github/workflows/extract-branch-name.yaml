@@ -1,0 +1,19 @@
+name: Extract Branch names
+
+on:
+  push:
+    branches:
+      - main
+      - qa
+      - dev
+      - 'release/**'
+      - 'feature/**'
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Extract names
+        run: |
+          echo 'github.ref: ' ${{ github.ref }}
