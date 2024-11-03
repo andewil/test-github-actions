@@ -60,4 +60,4 @@ jobs:
           chmod +x *.sh
       - name: Extract version by script
         run: |
-          ./extract-version.sh
+          ./extract-version.sh >> $GITHUB_OUTPUT
