@@ -56,10 +56,11 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Prepare scripts
-        run: |
-          chmod +x *.sh
+        run: chmod +x *.sh
 
       - name: Extract version by script
-        run: |
-          ./extract-version.sh
+        run: ./extract-version.sh VAR1
         shell: bash
+
+      - name: Print version
+        run: echo "version=${{ env.VAR1 }}
