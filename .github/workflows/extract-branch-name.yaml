@@ -55,7 +55,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Extract version by script
+      - name: Prepare scripts
         run: |
           chmod +x *.sh
-          call ./extract-version.sh
+      - name: Extract version by script
+        run: |
+          ./extract-version.sh
